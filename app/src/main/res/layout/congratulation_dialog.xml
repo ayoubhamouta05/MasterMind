@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/nullColor"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/firework_img1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_firework"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/blue" />
+
+    <ImageView
+        android:id="@+id/firework_img2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_firework"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/red" />
+
+    <ImageView
+        android:id="@+id/firework_img3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_firework"
+        app:layout_constraintBottom_toBottomOf="@+id/firework_img2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/firework_img2"
+        app:layout_constraintVertical_bias="0.438"
+        app:tint="@color/green" />
+
+    <ImageView
+        android:id="@+id/dancer_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_dancer"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/congratulations_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/firework_img2" />
+
+    <TextView
+        android:id="@+id/congratulations_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="Congratulations"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tryColorsLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dancer_img"
+        app:layout_constraintStart_toStartOf="@+id/dancer_img" />
+
+    <LinearLayout
+        android:id="@+id/tryColorsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/numberTries_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:elevation="0.5dp"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:id="@+id/Item1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_items_background"
+                android:src="@drawable/ic_launcher_foreground"
+                app:tint="#00000000" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:elevation="0.5dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp">
+
+            <ImageView
+                android:id="@+id/Item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_items_background"
+                android:src="@drawable/ic_launcher_foreground"
+                app:tint="#00000000" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:elevation="0.5dp"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:id="@+id/Item3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_items_background"
+                android:src="@drawable/ic_launcher_foreground"
+                app:tint="#00000000" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:elevation="0.5dp"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:id="@+id/Item4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_items_background"
+                android:src="@drawable/ic_launcher_foreground"
+                app:tint="#00000000" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:elevation="0.5dp"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:id="@+id/Item5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_items_background"
+                android:src="@drawable/ic_launcher_foreground"
+                app:tint="#00000000" />
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/numberTries_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="with 7 Tries"
+        android:textColor="@color/black"
+        android:layout_marginBottom="20dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tryAgainBtn"
+        app:layout_constraintEnd_toEndOf="@id/tryColorsLayout"
+        app:layout_constraintStart_toStartOf="@id/tryColorsLayout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tryAgainBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/_button_background"
+        android:backgroundTint="@color/blue"
+        android:layout_marginBottom="15dp"
+        android:text="Try Again"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/exit_game_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textSize="16sp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/exit_game_btn"
+        app:layout_constraintEnd_toStartOf="@id/exit_game_btn"
+        app:layout_constraintTop_toTopOf="@+id/exit_game_btn" />
+
+    <TextView
+        android:id="@+id/exit_game_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="25dp"
+        android:padding="5dp"
+        android:text="Exit Game"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tryAgainBtn"
+        app:layout_constraintStart_toStartOf="@+id/tryAgainBtn" />
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
