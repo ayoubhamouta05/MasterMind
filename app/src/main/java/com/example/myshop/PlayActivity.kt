@@ -30,13 +30,12 @@ import kotlinx.coroutines.launch
 val COLORS = arrayListOf("red", "white", "black", "green", "grey", "blue", "yellow", "purple")
 
 class PlayActivity : AppCompatActivity() {
-    lateinit var binding: ActivityPlayBinding
-    lateinit var checkColorsAdapter: CheckColorsAdapter
-    lateinit var tryColorsAdapter: TryColorsAdapter
-    var checkColorsList = arrayListOf<CheckColorsData>()
-    var tryColorsList = arrayListOf<TryColorsData>()
-
-    var resultCheckColor = arrayListOf("", "", "", "", "")
+    private lateinit var binding: ActivityPlayBinding
+    private lateinit var checkColorsAdapter: CheckColorsAdapter
+    private lateinit var tryColorsAdapter: TryColorsAdapter
+    private var checkColorsList = arrayListOf<CheckColorsData>()
+    private var tryColorsList = arrayListOf<TryColorsData>()
+    private var resultCheckColor = arrayListOf("", "", "", "", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +53,11 @@ class PlayActivity : AppCompatActivity() {
 
     }
 
-    private fun controlRVs(){
+    private fun controlRVs() {
         binding.rvTryColors.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 // Get the vertical scroll offset of the first RecyclerView
                 val scrollY = recyclerView.computeVerticalScrollOffset()
-
                 // Scroll the second RecyclerView to the same position
                 binding.rvCheckColors.scrollBy(0, dy)
             }
@@ -75,7 +73,7 @@ class PlayActivity : AppCompatActivity() {
         })
     }
 
-    private fun showRestartDialog(){
+    private fun showRestartDialog() {
         val dialog = Dialog(this)
         val dialogBinding = RestartGameDialogBinding.inflate(layoutInflater)
         dialog.setContentView(dialogBinding.root)
@@ -124,8 +122,9 @@ class PlayActivity : AppCompatActivity() {
                     }
                 }
 
-                setUserTrying(checkColorsArray)
-                binding.opportunity.text = "you have ${10 - tryColorsAdapter.differ.currentList.size} opportunity"
+                setUserTrying(checkColorsArray, colors)
+                binding.opportunity.text =
+                    "you have ${10 - tryColorsAdapter.differ.currentList.size} opportunity"
 
                 // check if is matched
                 if (colorsInTheSamePlace == colors.size) {
@@ -151,7 +150,7 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-    fun selectColor(color: String): Int {
+    private fun selectColor(color: String): Int {
         return when (color) {
             "red" -> {
                 R.color.red
@@ -200,11 +199,11 @@ class PlayActivity : AppCompatActivity() {
             )
         )
         dialogBinding.apply {
-            Item1.setBackgroundColor(resources.getColor(selectColor(colors[0]),null))
-            Item2.setBackgroundColor(resources.getColor(selectColor(colors[1]),null))
-            Item3.setBackgroundColor(resources.getColor(selectColor(colors[2]),null))
-            Item4.setBackgroundColor(resources.getColor(selectColor(colors[3]),null))
-            Item5.setBackgroundColor(resources.getColor(selectColor(colors[4]),null))
+            Item1.setBackgroundColor(resources.getColor(selectColor(colors[0]), null))
+            Item2.setBackgroundColor(resources.getColor(selectColor(colors[1]), null))
+            Item3.setBackgroundColor(resources.getColor(selectColor(colors[2]), null))
+            Item4.setBackgroundColor(resources.getColor(selectColor(colors[3]), null))
+            Item5.setBackgroundColor(resources.getColor(selectColor(colors[4]), null))
         }
 
 
@@ -237,11 +236,11 @@ class PlayActivity : AppCompatActivity() {
         dialogBinding.numberTriesTv.text = "With ${tryColorsAdapter.differ.currentList.size} Tries"
 
         dialogBinding.apply {
-            Item1.setBackgroundColor(resources.getColor(selectColor(colors[0]),null))
-            Item2.setBackgroundColor(resources.getColor(selectColor(colors[1]),null))
-            Item3.setBackgroundColor(resources.getColor(selectColor(colors[2]),null))
-            Item4.setBackgroundColor(resources.getColor(selectColor(colors[3]),null))
-            Item5.setBackgroundColor(resources.getColor(selectColor(colors[4]),null))
+            Item1.setBackgroundColor(resources.getColor(selectColor(colors[0]), null))
+            Item2.setBackgroundColor(resources.getColor(selectColor(colors[1]), null))
+            Item3.setBackgroundColor(resources.getColor(selectColor(colors[2]), null))
+            Item4.setBackgroundColor(resources.getColor(selectColor(colors[3]), null))
+            Item5.setBackgroundColor(resources.getColor(selectColor(colors[4]), null))
         }
 
         dialogBinding.tryAgainBtn.setOnClickListener {
@@ -269,8 +268,15 @@ class PlayActivity : AppCompatActivity() {
     }
 
     /** check the colors action */
-    private fun setUserTrying(checkColorsArray: MutableList<Int>) {
-        val newCheckColorsArray = removeDuplicatedColors(resultCheckColor, checkColorsArray)
+    private fun setUserTrying(
+        checkColorsArray: MutableList<Int>,
+        originalArrayColors: ArrayList<String>
+    ) {
+        val newCheckColorsArray =
+            removeDuplicatedColors(resultCheckColor, checkColorsArray, originalArrayColors)
+
+        Log.d("PlayActivityy", "checkColorsArray : $checkColorsArray")
+        Log.d("PlayActivityy", "newCheckColorsArray : $newCheckColorsArray")
 
         checkColorsList.add(
             CheckColorsData(
@@ -308,22 +314,25 @@ class PlayActivity : AppCompatActivity() {
     }
 
     /** retreive the place and existence of colors */
-    fun removeDuplicatedColors(
+    private fun removeDuplicatedColors(
         colorList: ArrayList<String>,
-        checkColorsArray: MutableList<Int>
+        checkColorsArray: MutableList<Int>,
+        originalArrayColors: ArrayList<String>
     ): MutableList<Int> {
         for (i in colorList.indices) {
             for (j in i + 1 until colorList.size) {
                 if (colorList[i] == colorList[j]) {
-                    checkColorsArray[j] =
-                        0 // set value 0 == mean the color does not exist or duplicated
+                    if (colorList[j] != originalArrayColors[j]) {
+                        checkColorsArray[j] =
+                            0 // set value 0 == mean the color does not exist or duplicated
+                    }
                 }
             }
         }
         return checkColorsArray.sorted().reversed().toMutableList()
     }
 
-    fun checkIfColorsChosenAreNotEmpty(): Boolean {
+    private fun checkIfColorsChosenAreNotEmpty(): Boolean {
         for (i in resultCheckColor) {
             if (i.isEmpty()) {
                 return false
@@ -333,20 +342,34 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-    fun fillTheTable(colors: ArrayList<String>): ArrayList<String> {
+    private fun fillTheTable(colors: ArrayList<String>): ArrayList<String> {
         val colorsToGuess = arrayListOf<String>()
-        val colorsSelected = arrayListOf<Int>()
-
         var i = 0
         while (i < 5) {
             val rand = (0..7).random()
-            if (!colorsSelected.contains(rand)) {
+            if (checkDuplicatedColorsAreNotMoreThanTwo(colorsToGuess,colors[rand])){
                 colorsToGuess.add(colors[rand])
-                colorsSelected.add(rand)
                 i++
             }
         }
         return colorsToGuess
+    }
+
+    private fun checkDuplicatedColorsAreNotMoreThanTwo(
+        colorsToGuess: ArrayList<String>,
+        color: String
+    ): Boolean {
+        var count = 0
+        for (i in colorsToGuess.indices) {
+            if (colorsToGuess[i] == color) {
+                count += 1
+            }
+            if (count > 2) {
+                return false
+            }
+        }
+        return true
+
     }
 
     private fun showBottomSheet() {
