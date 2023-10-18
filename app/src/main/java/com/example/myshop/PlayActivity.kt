@@ -340,11 +340,11 @@ class PlayActivity : AppCompatActivity() {
         var i = 0
         while (i < 5) {
             val rand = (0..7).random()
-            //if (!colorsSelected.contains(rand)) {
+            if (!colorsSelected.contains(rand)) {
                 colorsToGuess.add(colors[rand])
-                //colorsSelected.add(rand)
+                colorsSelected.add(rand)
                 i++
-           // }
+            }
         }
         return colorsToGuess
     }
