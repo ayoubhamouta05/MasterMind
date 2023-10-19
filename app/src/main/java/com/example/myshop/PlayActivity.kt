@@ -66,7 +66,6 @@ class PlayActivity : AppCompatActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 // Get the vertical scroll offset of the first RecyclerView
                 val scrollY = recyclerView.computeVerticalScrollOffset()
-
                 // Scroll the second RecyclerView to the same position
                 binding.rvTryColors.scrollBy(0, dy)
             }
@@ -190,7 +189,7 @@ class PlayActivity : AppCompatActivity() {
     private fun showFailureDialog(colors: ArrayList<String>) {
         val dialog = Dialog(this)
         val dialogBinding = FailureDialogBinding.inflate(layoutInflater)
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
         dialog.setContentView(dialogBinding.root)
         dialog.window?.setBackgroundDrawable(
             resources.getDrawable(
@@ -225,7 +224,7 @@ class PlayActivity : AppCompatActivity() {
 
         val dialog = Dialog(this)
         val dialogBinding = CongratulationDialogBinding.inflate(layoutInflater)
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
         dialog.setContentView(dialogBinding.root)
         dialog.window?.setBackgroundDrawable(
             resources.getDrawable(
@@ -342,35 +341,22 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-    private fun fillTheTable(colors: ArrayList<String>): ArrayList<String> {
+    fun fillTheTable(colors: ArrayList<String>): ArrayList<String> {
         val colorsToGuess = arrayListOf<String>()
+        val colorsSelected = arrayListOf<Int>()
+
         var i = 0
         while (i < 5) {
             val rand = (0..7).random()
-            if (checkDuplicatedColorsAreNotMoreThanTwo(colorsToGuess,colors[rand])){
+            if (!colorsSelected.contains(rand)) {
                 colorsToGuess.add(colors[rand])
+                colorsSelected.add(rand)
                 i++
             }
         }
         return colorsToGuess
     }
 
-    private fun checkDuplicatedColorsAreNotMoreThanTwo(
-        colorsToGuess: ArrayList<String>,
-        color: String
-    ): Boolean {
-        var count = 0
-        for (i in colorsToGuess.indices) {
-            if (colorsToGuess[i] == color) {
-                count += 1
-            }
-            if (count > 2) {
-                return false
-            }
-        }
-        return true
-
-    }
 
     private fun showBottomSheet() {
         val bottomSheetDialog = BottomSheetDialog(this)
