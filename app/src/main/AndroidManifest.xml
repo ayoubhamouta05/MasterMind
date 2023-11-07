@@ -15,7 +15,7 @@
         android:theme="@style/Theme.MyShop"
         tools:targetApi="31">
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -24,7 +24,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlayActivity"
+            android:name=".activities.PlayActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activities.SelectLevelActivity"
             android:exported="true"
             android:screenOrientation="portrait">
 

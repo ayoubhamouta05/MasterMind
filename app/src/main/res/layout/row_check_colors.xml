@@ -42,7 +42,6 @@
                 android:id="@+id/Item2"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-
                 android:background="@drawable/_circular_img_background" />
         </androidx.cardview.widget.CardView>
 
@@ -56,7 +55,6 @@
                 android:id="@+id/Item3"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-
                 android:background="@drawable/_circular_img_background" />
         </androidx.cardview.widget.CardView>
 
@@ -70,7 +68,6 @@
                 android:id="@+id/Item4"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-
                 android:background="@drawable/_circular_img_background" />
         </androidx.cardview.widget.CardView>
 
@@ -84,7 +81,6 @@
                 android:id="@+id/Item5"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-
                 android:background="@drawable/_circular_img_background" />
         </androidx.cardview.widget.CardView>
 

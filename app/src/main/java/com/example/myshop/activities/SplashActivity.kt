@@ -1,10 +1,15 @@
-package com.example.myshop
+package com.example.myshop.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-
+import com.example.myshop.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class SplashActivity : AppCompatActivity() {
@@ -12,11 +17,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        Handler().postDelayed({
+        CoroutineScope(Dispatchers.IO).launch {
             // This code will be executed after the 2 seconds delay
-            val intent = Intent(this, PlayActivity::class.java)
+            delay(2000L)
+            val intent = Intent(this@SplashActivity, SelectLevelActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000L)
+        }
     }
 }

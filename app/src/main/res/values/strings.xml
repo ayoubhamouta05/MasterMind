@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Master Mind</string>
+    <string name="how_to_play"><u>How to play ?</u></string>
 </resources>
