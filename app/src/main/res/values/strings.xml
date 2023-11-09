@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Master Mind</string>
     <string name="how_to_play"><u>How to play ?</u></string>
+    <string name="easy_explaining"> - Chances: 5\n- Check Result: the arrangement is important .\n- Duplicates: Not Allowed</string>
+    <string name="medium_explaining">- Chances: 8\n- Check Result: the arrangement is not important .\n- Duplicates: Allowed</string>
+    <string name="hard_explaining">- Chances: 15\n- Check Result: the arrangement is important .\n- Duplicates: Not Allowed</string>
+    <string name="expert_explaining">- Chances: 20\n- Check Result: the arrangement is not important .\n- Duplicates: Allowed</string>
 </resources>

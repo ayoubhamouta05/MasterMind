@@ -7,104 +7,192 @@
     android:layout_height="match_parent"
     tools:context=".activities.SelectLevelActivity">
 
-    <TextView
-        android:id="@+id/title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="MASTER MIND"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_easy"
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/_button_background"
-                android:text="Easy"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="MASTER MIND"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_medium"
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Level :"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/_button_background"
-                android:text="Medium"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_hard"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/_button_background"
-                android:text="Hard"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_easy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/_button_background"
+                        android:gravity="center"
+                        android:text="Easy"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_expert"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/_button_background"
-                android:text="Expert"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_weight="3"
+                        android:text="@string/easy_explaining"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/_button_background"
+                        android:gravity="center"
+                        android:text="Medium"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_weight="3"
+                        android:text="@string/medium_explaining"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_hard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/_button_background"
+                        android:gravity="center"
+                        android:text="Hard"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_weight="3"
+                        android:text="@string/hard_explaining"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_expert"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/_button_background"
+                        android:gravity="center"
+                        android:text="Expert"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_weight="3"
+                        android:text="@string/expert_explaining"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/how_to_play_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginVertical="30dp"
+                    android:text="@string/how_to_play"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/how_to_play"
-        android:textColor="@color/blue"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="10dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+    
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

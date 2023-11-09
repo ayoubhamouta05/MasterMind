@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myshop.R
 import com.example.myshop.databinding.ActivitySelectLevelBinding
+import com.example.myshop.databinding.ExplainGameBottomSheetLayoutBinding
+import com.example.myshop.databinding.SelectColorBottomSheetLayoutBinding
 import com.example.myshop.util.Constants.EASY
 import com.example.myshop.util.Constants.EXPERT
 import com.example.myshop.util.Constants.HARD
 import com.example.myshop.util.Constants.LEVEL_KEY
 import com.example.myshop.util.Constants.MEDIUM
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class SelectLevelActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySelectLevelBinding
@@ -19,6 +22,9 @@ class SelectLevelActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         selectLevel()
+        binding.howToPlayTv.setOnClickListener {
+            showBottomSheet()
+        }
 
     }
 
@@ -40,6 +46,17 @@ class SelectLevelActivity : AppCompatActivity() {
             intent.putExtra(LEVEL_KEY , EXPERT)
             startActivity(intent)
         }
+
+    }
+
+    private fun showBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetBinding = ExplainGameBottomSheetLayoutBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+
+//        val behavior = BottomSheetBehavior.from(bottomSheetBinding.root.parent as View)
+//        behavior.isDraggable = true
+        bottomSheetDialog.show()
 
     }
 }

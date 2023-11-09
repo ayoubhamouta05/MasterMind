@@ -15,10 +15,10 @@ import com.example.myshop.R
 import com.example.myshop.adapter.CheckColorsAdapter
 import com.example.myshop.adapter.TryColorsAdapter
 import com.example.myshop.databinding.ActivityPlayBinding
-import com.example.myshop.databinding.BottomSheetLayoutBinding
 import com.example.myshop.databinding.CongratulationDialogBinding
 import com.example.myshop.databinding.FailureDialogBinding
 import com.example.myshop.databinding.RestartGameDialogBinding
+import com.example.myshop.databinding.SelectColorBottomSheetLayoutBinding
 import com.example.myshop.models.CheckColorsData
 import com.example.myshop.models.TryColorsData
 import com.example.myshop.util.Constants.COLORS
@@ -28,6 +28,7 @@ import com.example.myshop.util.Constants.HARD
 import com.example.myshop.util.Constants.LEVEL_KEY
 import com.example.myshop.util.Constants.MEDIUM
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlin.properties.Delegates
 
 
 class PlayActivity : AppCompatActivity() {
@@ -38,28 +39,57 @@ class PlayActivity : AppCompatActivity() {
     private var tryColorsList = arrayListOf<TryColorsData>()
     private var resultCheckColor = arrayListOf("", "", "", "", "")
     lateinit var level : String
+    var triesNumber by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         level = intent.extras?.getString(LEVEL_KEY)!!
 
+        startGame(level)
+
+        controlRVs()
+
+    }
+
+    private fun startGame(level : String){
         when (level) {
 
             EASY -> {
-                play(fillTheTableWithoutRep(COLORS), level)
+//                - Chances: 5
+//                - Check Result: the arrangement is important .
+//                - Duplicates: Not Allowed
+                triesNumber = 5
+                binding.opportunity.text = "you have $triesNumber opportunities"
+                play(fillTheTableWithoutRep(COLORS), level )
             }
 
             MEDIUM -> {
-                play(fillTheTableWithoutRep(COLORS), level)
-            }
-
-            HARD -> {
+//                - Chances: 8
+//                - Check Result: the arrangement is important .
+//                - Duplicates: Allowed
+                triesNumber = 8
+                binding.opportunity.text = "you have $triesNumber opportunities"
                 play(fillTheTableWith2Rep(COLORS) , level)
             }
 
+            HARD -> {
+//                - Chances: 15
+//                - Check Result: The arrangement is not important .
+//                - Duplicates: Not Allowed
+                triesNumber = 15
+                binding.opportunity.text = "you have $triesNumber opportunities"
+                play(fillTheTableWithoutRep(COLORS), level)
+            }
+
             EXPERT -> {
+//                - Chances: 20
+//                - Check Result: The arrangement is not important .
+//                - Duplicates: Allowed
+                triesNumber = 20
+                binding.opportunity.text = "you have $triesNumber opportunities"
                 play(fillTheTableWith2Rep(COLORS), level)
             }
 
@@ -68,9 +98,6 @@ class PlayActivity : AppCompatActivity() {
         binding.restartBtn.setOnClickListener {
             showRestartDialog()
         }
-
-        controlRVs()
-
     }
 
     private fun controlRVs() {
@@ -139,14 +166,16 @@ class PlayActivity : AppCompatActivity() {
                 setUserTrying(checkColorsArray, colors , level)
 
                 binding.opportunity.text =
-                    "you have ${10 - tryColorsAdapter.differ.currentList.size} opportunity"
+                    "you have ${triesNumber - tryColorsAdapter.differ.currentList.size} opportunities"
 
                 // check if is matched
                 if (colorsInTheSamePlace == colors.size) {
                     /** the player win */
                     showWinDialog(colors)
-                } else if (tryColorsAdapter.differ.currentList.size == 10) {
+                    binding.checkColorBtn.isEnabled = false
+                } else if (tryColorsAdapter.differ.currentList.size == triesNumber) {
                     showFailureDialog(colors)
+                    binding.checkColorBtn.isEnabled = false
                 }
 
             } else {
@@ -272,7 +301,7 @@ class PlayActivity : AppCompatActivity() {
     }
 
     private fun playAgain() {
-        if(level == MEDIUM || level == EASY){
+        if(level == HARD || level == EASY){
             play(fillTheTableWithoutRep(COLORS),level)
         }else{
             play(fillTheTableWith2Rep(COLORS),level)
@@ -282,7 +311,8 @@ class PlayActivity : AppCompatActivity() {
         tryColorsList = arrayListOf()
         tryColorsAdapter.differ.submitList(tryColorsList)
         checkColorsAdapter.differ.submitList(checkColorsList)
-        binding.opportunity.text = "you have 10 opportunity"
+        binding.opportunity.text = "you have $triesNumber opportunities"
+        binding.checkColorBtn.isEnabled = true
     }
 
     /** check the colors action */
@@ -353,7 +383,7 @@ class PlayActivity : AppCompatActivity() {
             }
         }
         // In easy and hard the check colors will stay on there positions normally
-        return if (level == EASY || level == HARD){
+        return if (level == EASY || level == MEDIUM){
             checkColorsArray.toMutableList()
         }else{ // the user will not really know if the color is correct depend on his position
             checkColorsArray.sorted().reversed().toMutableList()
@@ -441,8 +471,9 @@ class PlayActivity : AppCompatActivity() {
 
     private fun showBottomSheet() {
         val bottomSheetDialog = BottomSheetDialog(this)
-        val bottomSheetBinding = BottomSheetLayoutBinding.inflate(layoutInflater)
+        val bottomSheetBinding = SelectColorBottomSheetLayoutBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(bottomSheetBinding.root)
+
         for (i in 0 until binding.originalColorsLayout.childCount - 1) {
             val childView = binding.originalColorsLayout.getChildAt(i)
             childView.setOnClickListener {
@@ -485,7 +516,7 @@ class PlayActivity : AppCompatActivity() {
 
     private fun setupBottomSheetClickListener(
         bottomSheetDialog: BottomSheetDialog,
-        bottomSheetBinding: BottomSheetLayoutBinding,
+        bottomSheetBinding: SelectColorBottomSheetLayoutBinding,
         imageView: View,
         i: Int
     ) {
@@ -534,8 +565,9 @@ class PlayActivity : AppCompatActivity() {
     private fun setupCheckRv() {
         checkColorsAdapter = CheckColorsAdapter()
         binding.rvCheckColors.apply {
-            var mlayoutManager = LinearLayoutManager(this@PlayActivity)
+            val mlayoutManager = LinearLayoutManager(this@PlayActivity)
             mlayoutManager.reverseLayout = true
+            mlayoutManager.stackFromEnd = true
             layoutManager = mlayoutManager
             adapter = checkColorsAdapter
             checkColorsAdapter.differ.submitList(checkColorsList)
@@ -546,11 +578,14 @@ class PlayActivity : AppCompatActivity() {
     private fun setupTryRv() {
         tryColorsAdapter = TryColorsAdapter()
         binding.rvTryColors.apply {
-            var mlayoutManager = LinearLayoutManager(this@PlayActivity)
+            val mlayoutManager = LinearLayoutManager(this@PlayActivity)
             mlayoutManager.reverseLayout = true
+            mlayoutManager.stackFromEnd = true
             layoutManager = mlayoutManager
             adapter = tryColorsAdapter
             tryColorsAdapter.differ.submitList(tryColorsList)
+
+
 
         }
     }
